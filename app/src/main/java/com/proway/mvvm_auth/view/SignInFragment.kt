@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.proway.mvvm_auth.MainActivity
 import com.proway.mvvm_auth.R
+import com.proway.mvvm_auth.utils.replaceView
 import com.proway.mvvm_auth.view_model.SignInViewModel
 
 class SignInFragment : Fragment(R.layout.sign_in_fragment) {
@@ -23,11 +24,11 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private lateinit var viewModel: SignInViewModel
 
     // observer para user
-    private val observerUser = Observer<FirebaseUser> {
-        (requireActivity() as? MainActivity)?.replaceView(ContentFragment.newInstance())
+    private val observerNewUser = Observer<FirebaseUser> {
+        requireActivity().replaceView(ContentFragment.newInstance())
     }
 
-    // observer para erro
+    // observer para error
     private val observerError = Observer<String> {
         Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
     }
@@ -37,7 +38,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
         viewModel.error.observe(viewLifecycleOwner, observerError)
-        viewModel.user.observe(viewLifecycleOwner, observerUser)
+        viewModel.user.observe(viewLifecycleOwner, observerNewUser)
 
         /*
         * Add events on components view

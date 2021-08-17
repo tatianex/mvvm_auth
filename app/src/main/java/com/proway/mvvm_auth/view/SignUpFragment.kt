@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.proway.mvvm_auth.MainActivity
 import com.proway.mvvm_auth.R
+import com.proway.mvvm_auth.utils.replaceView
 import com.proway.mvvm_auth.view_model.SignUpViewModel
 
 class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
@@ -45,7 +46,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         }
 
         view.findViewById<View>(R.id.backButton).setOnClickListener {
-            (requireActivity() as? MainActivity)?.replaceView(SignInFragment.newInstance())
+            requireActivity().replaceView(SignInFragment.newInstance(), R.id.action_bar)
         }
     }
 
