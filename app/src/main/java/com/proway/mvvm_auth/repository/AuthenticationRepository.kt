@@ -7,9 +7,29 @@ class AuthenticationRepository {
 
     private val auth = FirebaseAuth.getInstance()
 
-//    fun signInWithEmailPassword(email: String, password: String) {
-//    }
+    fun signInWithEmailPassword(
+        email: String,
+        password: String,
+        callback: (FirebaseUser?, String?) -> Unit,
+    ) {
+        val task =auth.signInWithEmailAndPassword(email, password)
+        task.addOnSuccessListener { authResult ->
+            if (authResult.user != null) {
+                callback(authResult.user, null)
+            }
+            else {
+                callback(null, "Erro no login")
+            }
+        }
+        task.addOnFailureListener {
+            callback(null, it.message)
+        }
+    }
 
+    /**
+     * Function to create a new user on Firebase
+     * it returns the User inside of the class
+     */
     fun createAccountWithEmailPassword(
         email: String,
         password: String,
