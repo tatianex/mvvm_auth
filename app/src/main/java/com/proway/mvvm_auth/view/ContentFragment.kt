@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.proway.mvvm_auth.R
 import com.proway.mvvm_auth.adapter.AccountsAdapter
-import android.accounts.Account
+import com.proway.mvvm_auth.model.Account
 import com.proway.mvvm_auth.view_model.ContentViewModel
 
 class ContentFragment : Fragment(R.layout.content_fragment) {
